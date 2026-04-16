@@ -1,0 +1,44 @@
+{
+  "name": "@chrono-meter/wp-playwright-helper",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "author": "chrono-meter@gmx.net",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.0",
+  "peerDependencies": {
+    "@playwright/test": "^1.59.0",
+    "@wordpress/e2e-test-utils-playwright": "^1.43.0"
+  },
+  "devDependencies": {
+    "@types/node": "25.6.0",
+    "@wordpress/e2e-test-utils-playwright": "^1.43.0",
+    "typescript": "6.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrono-meter/wp-playwright-helper.git"
+  },
+  "keywords": [
+    "wordpress",
+    "testing",
+    "playwright",
+    "e2e"
+  ]
+}
