@@ -252,7 +252,7 @@ export function installWordPress(
         // Step 1 – Download WordPress
         console.info('Downloading WordPress...')
         // https://developer.wordpress.org/cli/commands/core/download/
-        const baseInstallArgs = ['--path=' + path, '--locale=' + locale, '--skip-content']
+        const baseInstallArgs = ['--path=' + path, '--skip-content']
         force && baseInstallArgs.push('--force')
         try {
             wp('core', 'download', ...baseInstallArgs, '--version=' + version)
@@ -307,6 +307,10 @@ export function installWordPress(
             '--locale=' + locale,
             '--skip-email',
         )
+
+        // Step 5 - wp language core install $locale --activate ; wp site switch-language $locale
+        wp('language', 'core', 'install', locale, '--activate', '--path=' + path)
+        wp('site', 'switch-language', locale, '--path=' + path)
 
         console.info("\u001b[32mWordPress installed successfully.\u001b[0m")
 

@@ -44,14 +44,14 @@ export default async function (config: FullConfig) {
         dbPassword: wpConfig.DB_PASSWORD,
 
         // Inherit some values from the existing dev instance for convenience.
-        version: version,
-        locale: locale,
+        version: metadata?.version || version,
+        locale: metadata?.locale || locale,
 
         // Use fixed value for administrator credentials and some values, as they are required for e2e tests and it's more convenient to hardcode them here.
-        adminUser: process.env.WP_USERNAME || 'admin',
-        adminPassword: process.env.WP_PASSWORD || 'password',
-        adminEmail: 'admin@wordpress.local',
-        title: 'WordPress e2e Testing',
+        adminUser: metadata?.adminUser || process.env.WP_USERNAME || 'admin',
+        adminPassword: metadata?.adminPassword || process.env.WP_PASSWORD || 'password',
+        adminEmail: metadata?.adminEmail || 'admin@wordpress.local',
+        title: metadata?.siteTitle || 'WordPress e2e Testing',
 
         force: metadata?.force ?? true,
     }

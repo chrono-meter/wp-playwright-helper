@@ -1,6 +1,14 @@
-# Important notes
+# @chrono-meter/wp-playwright-helper
 Setting up an End-To-End (E2E) test environment is quite difficult in practice and will likely cause you some trouble.
 
+Building an environment that closely resembles the actual execution environment of the distributed code requires extensive permissions and complex prerequisites.
+
+Fortunately, your development environment appears to have an HTTP server and a MySQL-compatible database, so let's use those. This choice may be somewhat crude, but now all that's needed for the e2e test environment is a Playwright runtime environment.
+
+You can run Playwright directly on your machine, or you can run Playwright within a dev container and use the [Light-weight Desktop (desktop-lite)](https://github.com/devcontainers/features/tree/main/src/desktop-lite) GUI. You might also be able to use the [docker image](https://hub.docker.com/r/microsoft/playwright).
+
+
+# Important notes
 **At first, please back up your data to prepare for potential data loss.**
 
 This package creates a WordPress instance in the following way, it will try to reuse your development environment as much as possible:
@@ -46,8 +54,6 @@ const require = createRequire(import.meta.url)
  * 
  * @link https://github.com/WordPress/gutenberg/blob/trunk/packages/e2e-test-utils-playwright/src/config.ts
  */
-process.env.WP_USERNAME = process.env.WP_USERNAME || 'admin'
-process.env.WP_PASSWORD = process.env.WP_PASSWORD || 'password'
 process.env.WP_BASE_URL = process.env.WP_BASE_URL || 'http://localhost/.e2etest/'  // Must be ends with a slash.
 
 
@@ -71,6 +77,13 @@ export default defineConfig({
 
     metadata: {
         globalSetup: {
+            // adminUser: 'admin',
+            // adminPassword: 'password',
+            // adminEmail: 'admin@wordpress.local',
+            // siteTitle: 'WordPress e2e Testing',
+            // version: 'latest',
+            // locale: 'ja',
+
             // Setup steps before WordPress installation, such as building the plugin and preparing the test environment.
             beforeInstallWordPress: async (config: FullConfig) => {
                 // const cwd = process.cwd()
