@@ -257,9 +257,11 @@ export function installWordPress(
         try {
             wp('core', 'download', ...baseInstallArgs, '--version=' + version)
         } catch (error) {
-            if (error instanceof WPCliError && error.message.includes('WordPress files seem to already be present here.')) {
+            if (!force && error instanceof WPCliError && error.message.includes('WordPress files seem to already be present here.')) {
                 // Retry with `--force`.
                 wp('core', 'download', ...baseInstallArgs, '--version=' + version, '--force')
+            } else {
+                throw error
             }
         }
 
